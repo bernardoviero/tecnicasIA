@@ -34,7 +34,13 @@ public class Travessia2 implements Estado {
     }
     
     private boolean ehValido(Travessia2 estado){
-        return !(canibais > missionarios);
+        if(3-this.missionarios < 3-this.canibais && 3-this.missionarios != 0){
+            return false;
+        }if(this.missionarios < this.canibais && this.missionarios !=0){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     private char margemOposta(char margem){
