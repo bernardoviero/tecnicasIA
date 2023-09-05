@@ -34,7 +34,7 @@ public class Travessia2 implements Estado {
     }
     
     private boolean ehValido(Travessia2 estado){
-        return !(canibais < missionarios);
+        return !(canibais > missionarios);
     }
     
     private char margemOposta(char margem){
@@ -46,57 +46,112 @@ public class Travessia2 implements Estado {
     }
     
     public void levar1M(List<Estado> visitados){
-        char novoBarco = margemOposta(barco);
-        
-        Travessia2 novo = new Travessia2(this.canibais,this.missionarios-1,novoBarco,"Levando 1 missionario para a "+novoBarco);
-        if(ehValido(novo) && !visitados.contains(novo)){
-            visitados.add(novo);
+        if(this.barco == 'e' && this.missionarios > 0){
+            char novoBarco = margemOposta(barco);
+            Travessia2 novo = new Travessia2(this.canibais,this.missionarios-1,novoBarco,"Levando 1 missionario para a "+novoBarco);
+            if(ehValido(novo) && !visitados.contains(novo)){
+                visitados.add(novo);
+            }else{
+                System.gc();
+            }
         }else{
-            System.gc();
+            if(this.barco == 'd' && this.missionarios < 3){
+                char novoBarco = margemOposta(barco);
+                Travessia2 novo = new Travessia2(this.canibais,this.missionarios+1,novoBarco,"Levando 1 missionario para a "+novoBarco);
+                if(ehValido(novo) && !visitados.contains(novo)){
+                    visitados.add(novo);
+                }else{
+                    System.gc();
+                }
+            }
         }
     }
     
     public void levar1C(List<Estado> visitados){
-        char novoBarco = margemOposta(barco);
-        
-        Travessia2 novo = new Travessia2(this.canibais-1,this.missionarios,novoBarco,"Levando 1 canibal para a "+novoBarco);
-        if(ehValido(novo) && !visitados.contains(novo)){
-            visitados.add(novo);
+       if(this.barco == 'e' && this.canibais > 0){
+            char novoBarco = margemOposta(barco);
+            Travessia2 novo = new Travessia2(this.canibais-1,this.missionarios,novoBarco,"Levando 1 canibal para a "+novoBarco);
+            if(ehValido(novo) && !visitados.contains(novo)){
+                visitados.add(novo);
+            }else{
+                System.gc();
+            }
         }else{
-            System.gc();
+            if(this.barco == 'd' && this.canibais < 3){
+                char novoBarco = margemOposta(barco);
+                Travessia2 novo = new Travessia2(this.canibais+1,this.missionarios,novoBarco,"Levando 1 canibal para a "+novoBarco);
+                if(ehValido(novo) && !visitados.contains(novo)){
+                    visitados.add(novo);
+                }else{
+                    System.gc();
+                }
+            }
         }
     }
     
     public void levar1M1C(List<Estado> visitados){
-        char novoBarco = margemOposta(barco);
-        
-        Travessia2 novo = new Travessia2(this.canibais-1,this.missionarios-1,novoBarco,"Levando 1 canibal e 1 missionario para a "+novoBarco);
-        if(ehValido(novo) && !visitados.contains(novo)){
-            visitados.add(novo);
+        if(this.barco == 'e' && this.missionarios > 0 && this.canibais > 0){
+            char novoBarco = margemOposta(barco);
+            Travessia2 novo = new Travessia2(this.canibais-1,this.missionarios-1,novoBarco,"Levando 1 missionario e 1 canibal para a "+novoBarco);
+            if(ehValido(novo) && !visitados.contains(novo)){
+                visitados.add(novo);
+            }else{
+                System.gc();
+            }
         }else{
-            System.gc();
+            if(this.barco == 'd' && this.canibais < 3 && this.missionarios < 3){
+                char novoBarco = margemOposta(barco);
+                Travessia2 novo = new Travessia2(this.canibais+1,this.missionarios+1,novoBarco,"Levando 1 missionario e 1 canibal para a "+novoBarco);
+                if(ehValido(novo) && !visitados.contains(novo)){
+                    visitados.add(novo);
+                }else{
+                    System.gc();
+                }
+            }
         }
     }
     
     public void levar2M(List<Estado> visitados){
-        char novoBarco = margemOposta(barco);
-        
-        Travessia2 novo = new Travessia2(this.canibais,this.missionarios-2,novoBarco,"Levando 2 missionario para a "+novoBarco);
-        if(ehValido(novo) && !visitados.contains(novo)){
-            visitados.add(novo);
+        if(this.barco == 'e' && this.missionarios > 1){
+            char novoBarco = margemOposta(barco);
+            Travessia2 novo = new Travessia2(this.canibais,this.missionarios-2,novoBarco,"Levando 2 missionarios para a "+novoBarco);
+            if(ehValido(novo) && !visitados.contains(novo)){
+                visitados.add(novo);
+            }else{
+                System.gc();
+            }
         }else{
-            System.gc();
+            if(this.barco == 'd' && this.missionarios < 2){
+                char novoBarco = margemOposta(barco);
+                Travessia2 novo = new Travessia2(this.canibais,this.missionarios+2,novoBarco,"Levando 2 missionarios para a "+novoBarco);
+                if(ehValido(novo) && !visitados.contains(novo)){
+                    visitados.add(novo);
+                }else{
+                    System.gc();
+                }
+            }
         }
     }
     
     public void levar2C(List<Estado> visitados){
-        char novoBarco = margemOposta(barco);
-        
-        Travessia2 novo = new Travessia2(this.canibais-2,this.missionarios,novoBarco,"Levando 2 canibais para a "+novoBarco);
-        if(ehValido(novo) && !visitados.contains(novo)){
-            visitados.add(novo);
+        if(this.barco == 'e' && this.canibais > 1){
+            char novoBarco = margemOposta(barco);
+            Travessia2 novo = new Travessia2(this.canibais-2,this.missionarios,novoBarco,"Levando 2 canibais para a "+novoBarco);
+            if(ehValido(novo) && !visitados.contains(novo)){
+                visitados.add(novo);
+            }else{
+                System.gc();
+            }
         }else{
-            System.gc();
+            if(this.barco == 'd' && this.canibais < 2){
+                char novoBarco = margemOposta(barco);
+                Travessia2 novo = new Travessia2(this.canibais+2,this.missionarios,novoBarco,"Levando 2 canibais para a "+novoBarco);
+                if(ehValido(novo) && !visitados.contains(novo)){
+                    visitados.add(novo);
+                }else{
+                    System.gc();
+                }
+            }
         }
     }
 
